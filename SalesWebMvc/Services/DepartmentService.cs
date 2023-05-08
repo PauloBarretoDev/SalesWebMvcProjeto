@@ -1,20 +1,23 @@
-﻿using System.Linq;
-using SalesWebMvc.Models;
+﻿using SalesWebMvc.Models;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace SalesWebMvc.Services
 {
     public class DepartmentService
     {
         private readonly SalesWebMvcContext _context;
+
         public DepartmentService(SalesWebMvcContext context)
         {
-            // Injeção de dependencias
             _context = context;
         }
 
-        public List<Department> FindAll()
+        public async Task<List<Department>> FindAllAsync()
         {
-            return _context.Department.OrderBy(x => x.Name).ToList();
+            return await _context.Department.OrderBy(x => x.Name).ToListAsync();
         }
     }
 }
